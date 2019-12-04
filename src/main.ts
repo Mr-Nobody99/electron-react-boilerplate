@@ -1,9 +1,15 @@
+//Uncoment to load dev-tool extensions
+// const path = require('path');
+// const os = require('os');
+// const loadReactExtension = () => BrowserWindow.addDevToolsExtension(path.join(os.homedir(), '.config/google-chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.2.1_0'));
+
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = '1';
 
 declare var MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: any;
 declare var MAIN_WINDOW_WEBPACK_ENTRY: any;
 
 import { app, BrowserWindow } from 'electron';
+
 
 if (require('electron-squirrel-startup')) {
     app.quit();
@@ -36,7 +42,7 @@ const createWindow = () => {
 
 };
 
-app.on('ready', createWindow);
+app.on('ready', () => { createWindow(); /*loadReactExtension()*/ });
 app.on('activate', () => { E_Windows.MAIN === null && createWindow(); });
 app.on('window-all-closed', () => { process.platform !== 'darwin' && app.quit(); });
 
